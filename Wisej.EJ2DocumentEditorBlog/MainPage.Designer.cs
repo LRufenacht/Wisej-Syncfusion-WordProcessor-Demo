@@ -48,9 +48,9 @@
 			this.documentEditor1.Anchor = ((Wisej.Web.AnchorStyles)((((Wisej.Web.AnchorStyles.Top | Wisej.Web.AnchorStyles.Bottom) 
             | Wisej.Web.AnchorStyles.Left) 
             | Wisej.Web.AnchorStyles.Right)));
-			this.documentEditor1.Location = new System.Drawing.Point(348, 43);
+			this.documentEditor1.Location = new System.Drawing.Point(373, 30);
 			this.documentEditor1.Name = "documentEditor1";
-			this.documentEditor1.Size = new System.Drawing.Size(1181, 1103);
+			this.documentEditor1.Size = new System.Drawing.Size(1181, 733);
 			this.documentEditor1.TabIndex = 0;
 			this.documentEditor1.Text = "documentEditor1";
 			// 
@@ -99,7 +99,7 @@
 			this.flowLayoutPanelServer.BorderStyle = Wisej.Web.BorderStyle.Solid;
 			this.flowLayoutPanelServer.Controls.Add(this.buttonLoadServerFile);
 			this.flowLayoutPanelServer.Controls.Add(this.button3);
-			this.flowLayoutPanelServer.Location = new System.Drawing.Point(38, 43);
+			this.flowLayoutPanelServer.Location = new System.Drawing.Point(63, 30);
 			this.flowLayoutPanelServer.Name = "flowLayoutPanelServer";
 			this.flowLayoutPanelServer.ShowCloseButton = false;
 			this.flowLayoutPanelServer.ShowHeader = true;
@@ -135,15 +135,15 @@
 			// 
 			// flowLayoutPanelFiles
 			// 
-			this.flowLayoutPanelFiles.Anchor = Wisej.Web.AnchorStyles.Bottom;
+			this.flowLayoutPanelFiles.Anchor = ((Wisej.Web.AnchorStyles)((Wisej.Web.AnchorStyles.Top | Wisej.Web.AnchorStyles.Bottom)));
 			this.flowLayoutPanelFiles.AutoScroll = true;
 			this.flowLayoutPanelFiles.BorderStyle = Wisej.Web.BorderStyle.Solid;
-			this.flowLayoutPanelFiles.Location = new System.Drawing.Point(13, 145);
+			this.flowLayoutPanelFiles.Location = new System.Drawing.Point(13, 139);
 			this.flowLayoutPanelFiles.Name = "flowLayoutPanelFiles";
 			this.flowLayoutPanelFiles.Padding = new Wisej.Web.Padding(0, 0, 0, 20);
 			this.flowLayoutPanelFiles.ShowCloseButton = false;
 			this.flowLayoutPanelFiles.ShowHeader = true;
-			this.flowLayoutPanelFiles.Size = new System.Drawing.Size(275, 764);
+			this.flowLayoutPanelFiles.Size = new System.Drawing.Size(275, 400);
 			this.flowLayoutPanelFiles.TabIndex = 7;
 			this.flowLayoutPanelFiles.Text = "Client Files";
 			// 
@@ -151,7 +151,7 @@
 			// 
 			this.buttonOpenWord.Anchor = ((Wisej.Web.AnchorStyles)((Wisej.Web.AnchorStyles.Bottom | Wisej.Web.AnchorStyles.Left)));
 			this.buttonOpenWord.ImageSource = "icon-upload";
-			this.buttonOpenWord.Location = new System.Drawing.Point(13, 915);
+			this.buttonOpenWord.Location = new System.Drawing.Point(13, 545);
 			this.buttonOpenWord.Name = "buttonOpenWord";
 			this.buttonOpenWord.Size = new System.Drawing.Size(275, 37);
 			this.buttonOpenWord.TabIndex = 8;
@@ -161,13 +161,15 @@
 			// 
 			// panel1
 			// 
+			this.panel1.Anchor = ((Wisej.Web.AnchorStyles)(((Wisej.Web.AnchorStyles.Top | Wisej.Web.AnchorStyles.Bottom) 
+            | Wisej.Web.AnchorStyles.Left)));
 			this.panel1.BorderStyle = Wisej.Web.BorderStyle.Dashed;
 			this.panel1.Controls.Add(this.buttonOpenWord);
 			this.panel1.Controls.Add(this.flowLayoutPanelFiles);
 			this.panel1.Controls.Add(this.flowLayoutPanelClient);
-			this.panel1.Location = new System.Drawing.Point(24, 179);
+			this.panel1.Location = new System.Drawing.Point(49, 166);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(303, 967);
+			this.panel1.Size = new System.Drawing.Size(303, 597);
 			this.panel1.TabIndex = 9;
 			// 
 			// MainPage
@@ -178,7 +180,7 @@
 			this.Controls.Add(this.flowLayoutPanelServer);
 			this.Controls.Add(this.documentEditor1);
 			this.Name = "MainPage";
-			this.Size = new System.Drawing.Size(1603, 1190);
+			this.Size = new System.Drawing.Size(1603, 792);
 			this.Text = "Z";
 			this.Load += new System.EventHandler(this.MainPage_Load);
 			this.flowLayoutPanelClient.ResumeLayout(false);
