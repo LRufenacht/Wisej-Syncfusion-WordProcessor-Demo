@@ -18,6 +18,9 @@ namespace Wisej.EJ2DocumentEditorBlog
 		/// </summary>
 		private FileItemView selectedFileView;
 
+		/// <summary>
+		/// The selected client-side directory.
+		/// </summary>
 		private Ext.ClientFileSystem.Directory directory;
 
 		/// <summary>
@@ -45,12 +48,14 @@ namespace Wisej.EJ2DocumentEditorBlog
 			this.flowLayoutPanelFiles.Controls.Clear();
 		}
 
-		/// <summary>
-		/// Loads a file that's located on the server's file system.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void buttonLoadServerFile_Click(object sender, EventArgs e)
+        #region Server File System
+
+        /// <summary>
+        /// Loads a file that's located on the server's file system.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonLoadServerFile_Click(object sender, EventArgs e)
 		{
 			var loadPath = Application.MapPath("Test.docx");
 			using (var fs = new FileStream(loadPath, FileMode.Open))
@@ -62,17 +67,96 @@ namespace Wisej.EJ2DocumentEditorBlog
 		}
 
 		/// <summary>
+		/// Saves a file to the server's file system.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private async void buttonSaveServer_Click(object sender, EventArgs e)
+		{
+			var savePath = Application.MapPath("Test.docx");
+			var document = await this.documentEditor1.GetDocumentAsync();
+
+			System.IO.File.WriteAllBytes(savePath, document.ToArray());
+
+			AlertBox.Show("Saved as Test.docx");
+		}
+
+		#endregion
+
+		#region Client File System
+
+		/// <summary>
 		/// Loads files from the client's file system.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private async void buttonLoadClientDirectory_Click(object sender, EventArgs e)
+		private async void buttonSelectClientDirectory_Click(object sender, EventArgs e)
 		{
 			// get client docx files.
 			this.directory = await ClientFileSystem.ShowDirectoryPickerAsync();
 			var permission = await this.directory.RequestPermissionAsync(Permission.ReadWrite);
 
 			LoadClientFiles();
+		}
+
+		/// <summary>
+		/// Saves a file to the client using existing file access.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private async void buttonSaveClient_Click(object sender, EventArgs e)
+		{
+			var document = await this.documentEditor1.GetDocumentAsync();
+			if (this.selectedFileView != null)
+			{
+				this.selectedFileView.Save(document.ToArray());
+			}
+			else
+			{
+				var file = await ClientFileSystem.ShowSaveFilePickerAsync(false, "*.docx", "Test.docx");
+				await file.WriteBytesAsync(document.ToArray(), 0, WritableType.Write, false);
+			}
+
+			AlertBox.Show("File Saved");
+		}
+		
+		/// <summary>
+		/// Creates a new file in the client's file system.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private async void buttonCreateFile_Click(object sender, EventArgs e)
+		{
+			if (this.directory == null)
+			{
+				AlertBox.Show("Select a Client Directory First.");
+				return;
+			}
+
+			var file = await this.directory.GetFileAsync($"MyDocument-{DateTime.Now.ToString("yyyyMMddHHmmss")}.docx", true);
+			AddFileItemView(file);
+		}
+
+		/// <summary>
+		/// Opens the client-side document in Word.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private async void buttonOpenWord_Click(object sender, EventArgs e)
+		{
+			if (this.selectedFileView == null)
+			{
+				AlertBox.Show("No client file selected.", MessageBoxIcon.Error);
+				return;
+			}
+
+			// get the path of the document's directory.
+			var path = await Application.PromptAsync("Enter Document Parent Directory (no spaces)", "F:/Play");
+			if (path == null)
+				return;
+
+			// open word using the custom scheme.
+			Application.Navigate($"ms-word:ofe|u|{path}/{this.selectedFileView.File.Name}");
 		}
 
 		private async void LoadClientFiles()
@@ -87,7 +171,13 @@ namespace Wisej.EJ2DocumentEditorBlog
 				AddFileItemView(file);
 		}
 
-		private void AddFileItemView(Ext.ClientFileSystem.File file)
+        #endregion
+
+		/// <summary>
+		/// Adds a new <see cref="FileItemView"/> to the <see cref="flowLayoutPanelFiles"/>.
+		/// </summary>
+		/// <param name="file"></param>
+        private void AddFileItemView(Ext.ClientFileSystem.File file)
         {
 			var fileItemView = new FileItemView(file);
 
@@ -139,75 +229,5 @@ namespace Wisej.EJ2DocumentEditorBlog
 				}
 			}
 		}
-
-		/// <summary>
-		/// Saves a file to the client using existing file access.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private async void buttonSaveClient_Click(object sender, EventArgs e)
-		{
-			var document = await this.documentEditor1.GetDocumentAsync();
-			if (this.selectedFileView != null)
-			{
-				this.selectedFileView.Save(document.ToArray());
-			}
-			else
-			{
-				var file = await ClientFileSystem.ShowSaveFilePickerAsync(false, "*.docx", "Test.docx");
-				await file.WriteBytesAsync(document.ToArray(), 0, WritableType.Write, false);
-			}
-
-			AlertBox.Show("File Saved");
-		}
-
-		/// <summary>
-		/// Saves a file to the server's file system.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private async void buttonSaveServer_Click(object sender, EventArgs e)
-		{
-			var savePath = Application.MapPath("Test.docx");
-			var document = await this.documentEditor1.GetDocumentAsync();
-
-			System.IO.File.WriteAllBytes(savePath, document.ToArray());
-			
-			AlertBox.Show("Saved as Test.docx");
-		}
-
-		/// <summary>
-		/// Opens the client-side document in Word.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private async void buttonOpenWord_Click(object sender, EventArgs e)
-		{
-			if (this.selectedFileView == null)
-			{
-				AlertBox.Show("No client file selected.", MessageBoxIcon.Error);
-				return;
-			}
-
-			// get the path of the document's directory.
-			var path = await Application.PromptAsync("Enter Document Parent Directory (no spaces)", "F:/Play");
-			if (path == null)
-				return;
-
-			// open word using the custom scheme.
-			Application.Navigate($"ms-word:ofe|u|{path}/{this.selectedFileView.File.Name}");
-		}
-
-        private async void buttonCreate_Click(object sender, EventArgs e)
-        {
-			if (this.directory == null)
-            {
-				AlertBox.Show("Select a Client Directory First.");
-				return;
-			}
-
-			var file = await this.directory.GetFileAsync($"MyDocument-{DateTime.Now.ToString("yyyyMMddHHmmss")}.docx", true);
-			AddFileItemView(file);
-        }
     }
 }
