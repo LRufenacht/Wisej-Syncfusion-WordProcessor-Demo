@@ -68,14 +68,14 @@
             this.buttonSelectClientDirectory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonSelectClientDirectory.Click += new System.EventHandler(this.buttonSelectClientDirectory_Click);
             // 
-            // buttonSaveClient
+            // buttonSaveToClient
             // 
             this.buttonSaveToClient.Enabled = false;
             this.flowLayoutPanelClient.SetFillWeight(this.buttonSaveToClient, 1);
             this.flowLayoutPanelClient.SetFlowBreak(this.buttonSaveToClient, true);
             this.buttonSaveToClient.ImageSource = "icon-save";
             this.buttonSaveToClient.Location = new System.Drawing.Point(3, 46);
-            this.buttonSaveToClient.Name = "buttonSaveClient";
+            this.buttonSaveToClient.Name = "buttonSaveToClient";
             this.buttonSaveToClient.Size = new System.Drawing.Size(267, 37);
             this.buttonSaveToClient.TabIndex = 4;
             this.buttonSaveToClient.Text = "Save to Client";

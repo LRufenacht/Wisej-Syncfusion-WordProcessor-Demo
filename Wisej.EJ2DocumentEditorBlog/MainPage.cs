@@ -64,6 +64,8 @@ namespace Wisej.EJ2DocumentEditorBlog
 				var sfdt = JsonConvert.SerializeObject(document);
 				this.documentEditor1.OpenFile(sfdt);
 			}
+
+			this.buttonSaveToServer.Enabled = true;
 		}
 
 		/// <summary>
