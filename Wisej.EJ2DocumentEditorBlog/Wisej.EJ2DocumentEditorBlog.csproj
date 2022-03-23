@@ -81,7 +81,7 @@
   <ItemGroup />
   <ItemGroup>
     <PackageReference Include="Wisej-2-ClientFileSystem">
-      <Version>2.5.*</Version>
+      <Version>2.5.30-dev.1</Version>
     </PackageReference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Syncfusion.Compression.Base, Version=19.3450.0.43, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">

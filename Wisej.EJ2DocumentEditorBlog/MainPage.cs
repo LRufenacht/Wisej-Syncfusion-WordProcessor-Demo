@@ -18,6 +18,8 @@ namespace Wisej.EJ2DocumentEditorBlog
 		/// </summary>
 		private FileItemView selectedFileView;
 
+		private Ext.ClientFileSystem.Directory directory;
+
 		/// <summary>
 		/// Creates a new instance of <see cref="MainPage"/>.
 		/// </summary>
@@ -67,24 +69,34 @@ namespace Wisej.EJ2DocumentEditorBlog
 		private async void buttonLoadClientDirectory_Click(object sender, EventArgs e)
 		{
 			// get client docx files.
-			var directory = await ClientFileSystem.ShowDirectoryPickerAsync();
-			var files = await directory.GetFilesAsync("*.docx");
+			this.directory = await ClientFileSystem.ShowDirectoryPickerAsync();
+			var permission = await this.directory.RequestPermissionAsync(Permission.ReadWrite);
+
+			LoadClientFiles();
+		}
+
+		private async void LoadClientFiles()
+        {
+			var files = await this.directory.GetFilesAsync("*.docx");
 
 			if (files.Length == 0)
 				MessageBox.Show("No .docx files found. Try a different directory.");
 
 			// add a view for each file.
 			foreach (var file in files)
-			{
-				var fileItemView = new FileItemView(file);
+				AddFileItemView(file);
+		}
 
-				fileItemView.Click += FileItemView_Click;
+		private void AddFileItemView(Ext.ClientFileSystem.File file)
+        {
+			var fileItemView = new FileItemView(file);
 
-				// constrain view within a FlowLayoutPanel.
-				this.flowLayoutPanelFiles.Controls.Add(fileItemView);
-				this.flowLayoutPanelFiles.SetFillWeight(fileItemView, 1);
-				this.flowLayoutPanelFiles.SetFlowBreak(fileItemView, true);
-			}
+			fileItemView.Click += FileItemView_Click;
+
+			// constrain view within a FlowLayoutPanel.
+			this.flowLayoutPanelFiles.Controls.Add(fileItemView);
+			this.flowLayoutPanelFiles.SetFillWeight(fileItemView, 1);
+			this.flowLayoutPanelFiles.SetFlowBreak(fileItemView, true);
 		}
 
 		/// <summary>
@@ -113,11 +125,18 @@ namespace Wisej.EJ2DocumentEditorBlog
 		/// <param name="bytes"></param>
 		private void LoadFile(byte[] bytes)
 		{
-			using (var fs = new MemoryStream(bytes))
+			if (bytes.Length == 0) // open a blank document.
 			{
-				var document = WordDocument.Load(fs, FormatType.Docx);
-				var sfdt = JsonConvert.SerializeObject(document);
-				this.documentEditor1.OpenFile(sfdt);
+				this.documentEditor1.Instance.documentEditor.openBlank();
+			} 
+			else
+            {
+				using (var fs = new MemoryStream(bytes))
+				{
+					var document = WordDocument.Load(fs, FormatType.Docx);
+					var sfdt = JsonConvert.SerializeObject(document);
+					this.documentEditor1.OpenFile(sfdt);
+				}
 			}
 		}
 
@@ -178,5 +197,17 @@ namespace Wisej.EJ2DocumentEditorBlog
 			// open word using the custom scheme.
 			Application.Navigate($"ms-word:ofe|u|{path}/{this.selectedFileView.File.Name}");
 		}
-	}
+
+        private async void buttonCreate_Click(object sender, EventArgs e)
+        {
+			if (this.directory == null)
+            {
+				AlertBox.Show("Select a Client Directory First.");
+				return;
+			}
+
+			var file = await this.directory.GetFileAsync($"MyDocument-{DateTime.Now.ToString("yyyyMMddHHmmss")}.docx", true);
+			AddFileItemView(file);
+        }
+    }
 }
