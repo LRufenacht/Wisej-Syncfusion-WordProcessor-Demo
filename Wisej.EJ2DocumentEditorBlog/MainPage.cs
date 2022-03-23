@@ -71,7 +71,7 @@ namespace Wisej.EJ2DocumentEditorBlog
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private async void buttonSaveServer_Click(object sender, EventArgs e)
+		private async void buttonSaveToServer_Click(object sender, EventArgs e)
 		{
 			var savePath = Application.MapPath("Test.docx");
 			var document = await this.documentEditor1.GetDocumentAsync();
@@ -97,6 +97,8 @@ namespace Wisej.EJ2DocumentEditorBlog
 			var permission = await this.directory.RequestPermissionAsync(Permission.ReadWrite);
 
 			LoadClientFiles();
+
+			this.buttonCreateFile.Enabled = true;
 		}
 
 		/// <summary>
@@ -104,7 +106,7 @@ namespace Wisej.EJ2DocumentEditorBlog
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private async void buttonSaveClient_Click(object sender, EventArgs e)
+		private async void buttonSaveToClient_Click(object sender, EventArgs e)
 		{
 			var document = await this.documentEditor1.GetDocumentAsync();
 			if (this.selectedFileView != null)
@@ -206,6 +208,10 @@ namespace Wisej.EJ2DocumentEditorBlog
 			{
 				var bytes = await file.ReadBytesAsync();
 				LoadFile(bytes);
+
+				this.buttonSaveToClient.Enabled = true;
+				this.buttonSaveToServer.Enabled = true;
+
 			}
 		}
 

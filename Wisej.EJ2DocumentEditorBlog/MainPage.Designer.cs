@@ -30,18 +30,18 @@
 		{
             this.documentEditor1 = new Wisej.Web.Ext.Syncfusion2.DocumentEditor();
             this.buttonSelectClientDirectory = new Wisej.Web.Button();
-            this.buttonSaveClient = new Wisej.Web.Button();
+            this.buttonSaveToClient = new Wisej.Web.Button();
             this.flowLayoutPanelClient = new Wisej.Web.FlowLayoutPanel();
             this.buttonCreateFile = new Wisej.Web.Button();
             this.flowLayoutPanelServer = new Wisej.Web.FlowLayoutPanel();
             this.buttonLoadServerFile = new Wisej.Web.Button();
-            this.button3 = new Wisej.Web.Button();
+            this.buttonSaveToServer = new Wisej.Web.Button();
             this.flowLayoutPanelFiles = new Wisej.Web.FlowLayoutPanel();
             this.buttonOpenWord = new Wisej.Web.Button();
-            this.panel1 = new Wisej.Web.Panel();
+            this.panelClient = new Wisej.Web.Panel();
             this.flowLayoutPanelClient.SuspendLayout();
             this.flowLayoutPanelServer.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panelClient.SuspendLayout();
             this.SuspendLayout();
             // 
             // documentEditor1
@@ -70,23 +70,24 @@
             // 
             // buttonSaveClient
             // 
-            this.flowLayoutPanelClient.SetFillWeight(this.buttonSaveClient, 1);
-            this.flowLayoutPanelClient.SetFlowBreak(this.buttonSaveClient, true);
-            this.buttonSaveClient.ImageSource = "icon-save";
-            this.buttonSaveClient.Location = new System.Drawing.Point(3, 46);
-            this.buttonSaveClient.Name = "buttonSaveClient";
-            this.buttonSaveClient.Size = new System.Drawing.Size(267, 37);
-            this.buttonSaveClient.TabIndex = 4;
-            this.buttonSaveClient.Text = "Save to Client";
-            this.buttonSaveClient.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSaveClient.Click += new System.EventHandler(this.buttonSaveClient_Click);
+            this.buttonSaveToClient.Enabled = false;
+            this.flowLayoutPanelClient.SetFillWeight(this.buttonSaveToClient, 1);
+            this.flowLayoutPanelClient.SetFlowBreak(this.buttonSaveToClient, true);
+            this.buttonSaveToClient.ImageSource = "icon-save";
+            this.buttonSaveToClient.Location = new System.Drawing.Point(3, 46);
+            this.buttonSaveToClient.Name = "buttonSaveClient";
+            this.buttonSaveToClient.Size = new System.Drawing.Size(267, 37);
+            this.buttonSaveToClient.TabIndex = 4;
+            this.buttonSaveToClient.Text = "Save to Client";
+            this.buttonSaveToClient.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSaveToClient.Click += new System.EventHandler(this.buttonSaveToClient_Click);
             // 
             // flowLayoutPanelClient
             // 
             this.flowLayoutPanelClient.Anchor = Wisej.Web.AnchorStyles.Top;
             this.flowLayoutPanelClient.BorderStyle = Wisej.Web.BorderStyle.Solid;
             this.flowLayoutPanelClient.Controls.Add(this.buttonSelectClientDirectory);
-            this.flowLayoutPanelClient.Controls.Add(this.buttonSaveClient);
+            this.flowLayoutPanelClient.Controls.Add(this.buttonSaveToClient);
             this.flowLayoutPanelClient.Controls.Add(this.buttonCreateFile);
             this.flowLayoutPanelClient.Location = new System.Drawing.Point(13, 10);
             this.flowLayoutPanelClient.Name = "flowLayoutPanelClient";
@@ -98,6 +99,7 @@
             // 
             // buttonCreateFile
             // 
+            this.buttonCreateFile.Enabled = false;
             this.flowLayoutPanelClient.SetFillWeight(this.buttonCreateFile, 1);
             this.flowLayoutPanelClient.SetFlowBreak(this.buttonCreateFile, true);
             this.buttonCreateFile.ImageSource = "icon-new";
@@ -113,7 +115,7 @@
             // 
             this.flowLayoutPanelServer.BorderStyle = Wisej.Web.BorderStyle.Solid;
             this.flowLayoutPanelServer.Controls.Add(this.buttonLoadServerFile);
-            this.flowLayoutPanelServer.Controls.Add(this.button3);
+            this.flowLayoutPanelServer.Controls.Add(this.buttonSaveToServer);
             this.flowLayoutPanelServer.Location = new System.Drawing.Point(63, 30);
             this.flowLayoutPanelServer.Name = "flowLayoutPanelServer";
             this.flowLayoutPanelServer.ShowCloseButton = false;
@@ -135,18 +137,19 @@
             this.buttonLoadServerFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonLoadServerFile.Click += new System.EventHandler(this.buttonLoadServerFile_Click);
             // 
-            // button3
+            // buttonSaveToServer
             // 
-            this.flowLayoutPanelServer.SetFillWeight(this.button3, 1);
-            this.flowLayoutPanelServer.SetFlowBreak(this.button3, true);
-            this.button3.ImageSource = "icon-save";
-            this.button3.Location = new System.Drawing.Point(3, 46);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(267, 37);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Save to Server";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Click += new System.EventHandler(this.buttonSaveServer_Click);
+            this.buttonSaveToServer.Enabled = false;
+            this.flowLayoutPanelServer.SetFillWeight(this.buttonSaveToServer, 1);
+            this.flowLayoutPanelServer.SetFlowBreak(this.buttonSaveToServer, true);
+            this.buttonSaveToServer.ImageSource = "icon-save";
+            this.buttonSaveToServer.Location = new System.Drawing.Point(3, 46);
+            this.buttonSaveToServer.Name = "buttonSaveToServer";
+            this.buttonSaveToServer.Size = new System.Drawing.Size(267, 37);
+            this.buttonSaveToServer.TabIndex = 3;
+            this.buttonSaveToServer.Text = "Save to Server";
+            this.buttonSaveToServer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSaveToServer.Click += new System.EventHandler(this.buttonSaveToServer_Click);
             // 
             // flowLayoutPanelFiles
             // 
@@ -174,24 +177,24 @@
             this.buttonOpenWord.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonOpenWord.Click += new System.EventHandler(this.buttonOpenWord_Click);
             // 
-            // panel1
+            // panelClient
             // 
-            this.panel1.Anchor = ((Wisej.Web.AnchorStyles)(((Wisej.Web.AnchorStyles.Top | Wisej.Web.AnchorStyles.Bottom) 
+            this.panelClient.Anchor = ((Wisej.Web.AnchorStyles)(((Wisej.Web.AnchorStyles.Top | Wisej.Web.AnchorStyles.Bottom) 
             | Wisej.Web.AnchorStyles.Left)));
-            this.panel1.BorderStyle = Wisej.Web.BorderStyle.Dashed;
-            this.panel1.Controls.Add(this.buttonOpenWord);
-            this.panel1.Controls.Add(this.flowLayoutPanelFiles);
-            this.panel1.Controls.Add(this.flowLayoutPanelClient);
-            this.panel1.Location = new System.Drawing.Point(49, 166);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(303, 716);
-            this.panel1.TabIndex = 9;
+            this.panelClient.BorderStyle = Wisej.Web.BorderStyle.Dashed;
+            this.panelClient.Controls.Add(this.buttonOpenWord);
+            this.panelClient.Controls.Add(this.flowLayoutPanelFiles);
+            this.panelClient.Controls.Add(this.flowLayoutPanelClient);
+            this.panelClient.Location = new System.Drawing.Point(49, 166);
+            this.panelClient.Name = "panelClient";
+            this.panelClient.Size = new System.Drawing.Size(303, 716);
+            this.panelClient.TabIndex = 9;
             // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 19F);
             this.AutoScaleMode = Wisej.Web.AutoScaleMode.Font;
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelClient);
             this.Controls.Add(this.flowLayoutPanelServer);
             this.Controls.Add(this.documentEditor1);
             this.Name = "MainPage";
@@ -200,7 +203,7 @@
             this.Load += new System.EventHandler(this.MainPage_Load);
             this.flowLayoutPanelClient.ResumeLayout(false);
             this.flowLayoutPanelServer.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.panelClient.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
@@ -209,14 +212,14 @@
 
 		private Web.Ext.Syncfusion2.DocumentEditor documentEditor1;
 		private Web.Button buttonSelectClientDirectory;
-		private Web.Button buttonSaveClient;
+		private Web.Button buttonSaveToClient;
 		private Web.FlowLayoutPanel flowLayoutPanelClient;
 		private Web.FlowLayoutPanel flowLayoutPanelServer;
 		private Web.Button buttonLoadServerFile;
-		private Web.Button button3;
+		private Web.Button buttonSaveToServer;
 		private Web.FlowLayoutPanel flowLayoutPanelFiles;
 		private Web.Button buttonOpenWord;
-		private Web.Panel panel1;
+		private Web.Panel panelClient;
         private Web.Button buttonCreateFile;
     }
 }
