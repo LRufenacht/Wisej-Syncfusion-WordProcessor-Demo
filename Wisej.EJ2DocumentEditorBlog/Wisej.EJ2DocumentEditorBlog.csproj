@@ -51,6 +51,7 @@
     <Content Include="Libs\Syncfusion.EJ2.DocumentEditor.dll" />
     <Content Include="Libs\Syncfusion.Licensing.dll" />
     <Content Include="Libs\Syncfusion.OfficeChart.Base.dll" />
+    <Content Include="Libs\Wisej.Web.Ext.Syncfusion2.dll" />
     <Content Include="Test.docx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -58,6 +59,7 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="Wisej.Web.Ext.Syncfusion2.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />

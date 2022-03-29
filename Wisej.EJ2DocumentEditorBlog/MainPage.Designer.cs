@@ -51,7 +51,7 @@
             | Wisej.Web.AnchorStyles.Right)));
             this.documentEditor1.Location = new System.Drawing.Point(373, 30);
             this.documentEditor1.Name = "documentEditor1";
-            this.documentEditor1.Size = new System.Drawing.Size(1181, 852);
+            this.documentEditor1.Size = new System.Drawing.Size(1472, 835);
             this.documentEditor1.TabIndex = 0;
             this.documentEditor1.Text = "documentEditor1";
             // 
@@ -161,7 +161,7 @@
             this.flowLayoutPanelFiles.Padding = new Wisej.Web.Padding(0, 0, 0, 20);
             this.flowLayoutPanelFiles.ShowCloseButton = false;
             this.flowLayoutPanelFiles.ShowHeader = true;
-            this.flowLayoutPanelFiles.Size = new System.Drawing.Size(275, 478);
+            this.flowLayoutPanelFiles.Size = new System.Drawing.Size(275, 461);
             this.flowLayoutPanelFiles.TabIndex = 7;
             this.flowLayoutPanelFiles.Text = "Client Files";
             // 
@@ -169,7 +169,7 @@
             // 
             this.buttonOpenWord.Anchor = ((Wisej.Web.AnchorStyles)((Wisej.Web.AnchorStyles.Bottom | Wisej.Web.AnchorStyles.Left)));
             this.buttonOpenWord.ImageSource = "icon-upload";
-            this.buttonOpenWord.Location = new System.Drawing.Point(13, 664);
+            this.buttonOpenWord.Location = new System.Drawing.Point(13, 647);
             this.buttonOpenWord.Name = "buttonOpenWord";
             this.buttonOpenWord.Size = new System.Drawing.Size(275, 37);
             this.buttonOpenWord.TabIndex = 8;
@@ -187,7 +187,7 @@
             this.panelClient.Controls.Add(this.flowLayoutPanelClient);
             this.panelClient.Location = new System.Drawing.Point(49, 166);
             this.panelClient.Name = "panelClient";
-            this.panelClient.Size = new System.Drawing.Size(303, 716);
+            this.panelClient.Size = new System.Drawing.Size(303, 699);
             this.panelClient.TabIndex = 9;
             // 
             // MainPage
@@ -198,7 +198,7 @@
             this.Controls.Add(this.flowLayoutPanelServer);
             this.Controls.Add(this.documentEditor1);
             this.Name = "MainPage";
-            this.Size = new System.Drawing.Size(1603, 911);
+            this.Size = new System.Drawing.Size(1894, 894);
             this.Text = "Z";
             this.Load += new System.EventHandler(this.MainPage_Load);
             this.flowLayoutPanelClient.ResumeLayout(false);
